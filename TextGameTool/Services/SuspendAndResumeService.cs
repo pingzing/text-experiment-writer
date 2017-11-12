@@ -1,7 +1,6 @@
-﻿using System;
+﻿using CommonServiceLocator;
+using System;
 using System.Threading.Tasks;
-
-using Microsoft.Practices.ServiceLocation;
 
 using TextGameTool.Activation;
 using TextGameTool.Helpers;

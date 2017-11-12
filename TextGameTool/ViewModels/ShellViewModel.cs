@@ -6,8 +6,6 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
-using Microsoft.Practices.ServiceLocation;
-
 using TextGameTool.Helpers;
 using TextGameTool.Services;
 using TextGameTool.Views;
@@ -15,6 +13,7 @@ using TextGameTool.Views;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using CommonServiceLocator;
 
 namespace TextGameTool.ViewModels
 {
@@ -30,7 +29,7 @@ namespace TextGameTool.ViewModels
         {
             get
             {
-                return Microsoft.Practices.ServiceLocation.ServiceLocator.Current.GetInstance<NavigationServiceEx>();
+                return ServiceLocator.Current.GetInstance<NavigationServiceEx>();
             }
         }
 
@@ -166,10 +165,8 @@ namespace TextGameTool.ViewModels
             // TODO WTS: Change the symbols for each item as appropriate for your app
             // More on Segoe UI Symbol icons: https://docs.microsoft.com/windows/uwp/style/segoe-ui-symbol-font
             // Or to use an IconElement instead of a Symbol see https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/projectTypes/navigationpane.md
-            // Edit String/en-US/Resources.resw: Add a menu item title for each page
-            _primaryItems.Add(new ShellNavigationItem("Shell_Main".GetLocalized(), Symbol.Document, typeof(MainViewModel).FullName));
-            _primaryItems.Add(new ShellNavigationItem("Shell_MasterDetail".GetLocalized(), Symbol.Document, typeof(MasterDetailViewModel).FullName));
-            _primaryItems.Add(new ShellNavigationItem("Shell_TextFilePage".GetLocalized(), Symbol.Document, typeof(TextFilePageViewModel).FullName));
+            // Edit String/en-US/Resources.resw: Add a menu item title for each page            
+            _primaryItems.Add(new ShellNavigationItem("Shell_MasterDetail".GetLocalized(), Symbol.Document, typeof(MasterDetailViewModel).FullName));            
             _secondaryItems.Add(new ShellNavigationItem("Shell_Settings".GetLocalized(), Symbol.Setting, typeof(SettingsViewModel).FullName));
         }
 

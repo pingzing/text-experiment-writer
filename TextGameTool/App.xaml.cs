@@ -42,7 +42,7 @@ namespace TextGameTool
 
         private ActivationService CreateActivationService()
         {
-            return new ActivationService(this, typeof(ViewModels.MainViewModel), new Views.ShellPage());
+            return new ActivationService(this, typeof(ViewModels.MasterDetailViewModel), new Views.ShellPage());
         }
 
         private async void App_EnteredBackground(object sender, EnteredBackgroundEventArgs e)

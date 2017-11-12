@@ -8,6 +8,7 @@ using TextGameTool.Services;
 
 using Windows.ApplicationModel;
 using Windows.UI.Xaml;
+using TextGameTool.Helpers;
 
 namespace TextGameTool.ViewModels
 {
@@ -23,7 +24,7 @@ namespace TextGameTool.ViewModels
             set { Set(ref _elementTheme, value); }
         }
 
-        private string _versionDescription;
+        private string _versionDescription;    
 
         public string VersionDescription
         {
@@ -63,11 +64,10 @@ namespace TextGameTool.ViewModels
 
         private string GetVersionDescription()
         {
-            var package = Package.Current;
-            var packageId = package.Id;
-            var version = packageId.Version;
+            var package = Package.Current;     
+            var (major, minor, build, revision) = package.Id.Version;
 
-            return $"{package.DisplayName} - {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+            return $"{package.DisplayName} - {major}.{minor}.{build}.{revision}";
         }
     }
 }

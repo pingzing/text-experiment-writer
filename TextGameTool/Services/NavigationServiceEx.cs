@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using TextGameTool.Helpers;
-
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -14,13 +12,11 @@ namespace TextGameTool.Services
     public class NavigationServiceEx
     {
         public event NavigatedEventHandler Navigated;
-
         public event NavigationFailedEventHandler NavigationFailed;
 
         private readonly Dictionary<string, Type> _pages = new Dictionary<string, Type>();
 
         private Frame _frame;
-
         public Frame Frame
         {
             get
@@ -43,11 +39,8 @@ namespace TextGameTool.Services
         }
 
         public bool CanGoBack => Frame.CanGoBack;
-
         public bool CanGoForward => Frame.CanGoForward;
-
-        public void GoBack() => Frame.GoBack();
-
+        public void GoBack() => Frame.GoBack();    
         public void GoForward() => Frame.GoForward();
 
         public bool Navigate(string pageKey, object parameter = null, NavigationTransitionInfo infoOverride = null)
@@ -116,7 +109,6 @@ namespace TextGameTool.Services
         }
 
         private void Frame_NavigationFailed(object sender, NavigationFailedEventArgs e) => NavigationFailed?.Invoke(sender, e);
-
         private void Frame_Navigated(object sender, NavigationEventArgs e) => Navigated?.Invoke(sender, e);
     }
 }

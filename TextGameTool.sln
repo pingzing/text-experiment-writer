@@ -5,16 +5,21 @@ VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextGameTool", "TextGameTool\TextGameTool.csproj", "{1AADC324-F6DB-4489-8D58-4E7660320816}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BattleTextTokenizer", "..\TextGameExperiment\BattleTextTokenizer\BattleTextTokenizer.csproj", "{3B3C3BCF-4C69-40CF-B457-3F4263904063}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|ARM = Release|ARM
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1AADC324-F6DB-4489-8D58-4E7660320816}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{1AADC324-F6DB-4489-8D58-4E7660320816}.Debug|ARM.ActiveCfg = Debug|ARM
 		{1AADC324-F6DB-4489-8D58-4E7660320816}.Debug|ARM.Build.0 = Debug|ARM
 		{1AADC324-F6DB-4489-8D58-4E7660320816}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -24,6 +29,7 @@ Global
 		{1AADC324-F6DB-4489-8D58-4E7660320816}.Debug|x86.ActiveCfg = Debug|x86
 		{1AADC324-F6DB-4489-8D58-4E7660320816}.Debug|x86.Build.0 = Debug|x86
 		{1AADC324-F6DB-4489-8D58-4E7660320816}.Debug|x86.Deploy.0 = Debug|x86
+		{1AADC324-F6DB-4489-8D58-4E7660320816}.Release|Any CPU.ActiveCfg = Release|x86
 		{1AADC324-F6DB-4489-8D58-4E7660320816}.Release|ARM.ActiveCfg = Release|ARM
 		{1AADC324-F6DB-4489-8D58-4E7660320816}.Release|ARM.Build.0 = Release|ARM
 		{1AADC324-F6DB-4489-8D58-4E7660320816}.Release|ARM.Deploy.0 = Release|ARM
@@ -33,6 +39,22 @@ Global
 		{1AADC324-F6DB-4489-8D58-4E7660320816}.Release|x86.ActiveCfg = Release|x86
 		{1AADC324-F6DB-4489-8D58-4E7660320816}.Release|x86.Build.0 = Release|x86
 		{1AADC324-F6DB-4489-8D58-4E7660320816}.Release|x86.Deploy.0 = Release|x86
+		{3B3C3BCF-4C69-40CF-B457-3F4263904063}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B3C3BCF-4C69-40CF-B457-3F4263904063}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B3C3BCF-4C69-40CF-B457-3F4263904063}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{3B3C3BCF-4C69-40CF-B457-3F4263904063}.Debug|ARM.Build.0 = Debug|Any CPU
+		{3B3C3BCF-4C69-40CF-B457-3F4263904063}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3B3C3BCF-4C69-40CF-B457-3F4263904063}.Debug|x64.Build.0 = Debug|Any CPU
+		{3B3C3BCF-4C69-40CF-B457-3F4263904063}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3B3C3BCF-4C69-40CF-B457-3F4263904063}.Debug|x86.Build.0 = Debug|Any CPU
+		{3B3C3BCF-4C69-40CF-B457-3F4263904063}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B3C3BCF-4C69-40CF-B457-3F4263904063}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B3C3BCF-4C69-40CF-B457-3F4263904063}.Release|ARM.ActiveCfg = Release|Any CPU
+		{3B3C3BCF-4C69-40CF-B457-3F4263904063}.Release|ARM.Build.0 = Release|Any CPU
+		{3B3C3BCF-4C69-40CF-B457-3F4263904063}.Release|x64.ActiveCfg = Release|Any CPU
+		{3B3C3BCF-4C69-40CF-B457-3F4263904063}.Release|x64.Build.0 = Release|Any CPU
+		{3B3C3BCF-4C69-40CF-B457-3F4263904063}.Release|x86.ActiveCfg = Release|Any CPU
+		{3B3C3BCF-4C69-40CF-B457-3F4263904063}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

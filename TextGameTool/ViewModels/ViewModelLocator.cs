@@ -1,45 +1,50 @@
-﻿using System;
-
-using GalaSoft.MvvmLight.Ioc;
-
-using Microsoft.Practices.ServiceLocation;
-
-using TextGameTool.Services;
+﻿using TextGameTool.Services;
 using TextGameTool.Views;
+using Autofac;
+using CommonServiceLocator;
+using Autofac.Extras.CommonServiceLocator;
 
 namespace TextGameTool.ViewModels
 {
     public class ViewModelLocator
     {
+        private ContainerBuilder _builder;
+        public static IContainer Container;
+
         public ViewModelLocator()
         {
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            _builder = new ContainerBuilder();
 
-            SimpleIoc.Default.Register(() => new NavigationServiceEx());
-            SimpleIoc.Default.Register<ShellViewModel>();
-            Register<MainViewModel, MainPage>();
-            Register<MasterDetailViewModel, MasterDetailPage>();
-            Register<TextFilePageViewModel, TextFilePagePage>();
-            Register<SettingsViewModel, SettingsPage>();
+            //Services
+            _builder.RegisterType<NavigationServiceEx>().AsSelf().SingleInstance();
+            _builder.RegisterType<DialogueFilesService>().As<IDialogueFileService>().SingleInstance();                                    
+
+            // Pages
+            _builder.RegisterType<ShellViewModel>().AsSelf().SingleInstance();
+            _builder.RegisterType<MasterDetailViewModel>().AsSelf().SingleInstance();
+            _builder.RegisterType<SettingsViewModel>().AsSelf().SingleInstance();            
+
+            // Child VMs
+            _builder.RegisterType<DialogueViewModel>().AsSelf().InstancePerLifetimeScope();
+
+            Container = _builder.Build();
+            ServiceLocator.SetLocatorProvider(() => new AutofacServiceLocator(Container));
+
+            RegisterWithNavigation<MasterDetailViewModel, MasterDetailPage>();
+            RegisterWithNavigation<SettingsViewModel, SettingsPage>();
         }
 
-        public SettingsViewModel SettingsViewModel => ServiceLocator.Current.GetInstance<SettingsViewModel>();
+        public SettingsViewModel SettingsViewModel => Container.Resolve<SettingsViewModel>();
 
-        public TextFilePageViewModel TextFilePageViewModel => ServiceLocator.Current.GetInstance<TextFilePageViewModel>();
+        public MasterDetailViewModel MasterDetailViewModel => Container.Resolve<MasterDetailViewModel>();
 
-        public MasterDetailViewModel MasterDetailViewModel => ServiceLocator.Current.GetInstance<MasterDetailViewModel>();
+        public ShellViewModel ShellViewModel => Container.Resolve<ShellViewModel>();
 
-        public MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public NavigationServiceEx NavigationService => Container.Resolve<NavigationServiceEx>();
 
-        public ShellViewModel ShellViewModel => ServiceLocator.Current.GetInstance<ShellViewModel>();
-
-        public NavigationServiceEx NavigationService => ServiceLocator.Current.GetInstance<NavigationServiceEx>();
-
-        public void Register<VM, V>()
+        public void RegisterWithNavigation<VM, V>()
             where VM : class
-        {
-            SimpleIoc.Default.Register<VM>();
-
+        {            
             NavigationService.Configure(typeof(VM).FullName, typeof(V));
         }
     }

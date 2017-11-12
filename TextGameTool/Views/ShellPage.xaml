@@ -103,8 +103,7 @@
             OptionsItemTemplate="{StaticResource NavigationMenuItemDataTemplate}"
             OptionsItemsSource="{x:Bind ViewModel.SecondaryItems}"
             PaneBackground="{ThemeResource SystemControlBackgroundAltHighBrush}"
-            PaneForeground="{ThemeResource SystemControlForegroundBaseHighBrush}"
-            >
+            PaneForeground="{ThemeResource SystemControlForegroundBaseHighBrush}">
         <i:Interaction.Behaviors>
             <ic:EventTriggerBehavior EventName="ItemClick">
                 <ic:InvokeCommandAction Command="{x:Bind ViewModel.ItemSelectedCommand}" />

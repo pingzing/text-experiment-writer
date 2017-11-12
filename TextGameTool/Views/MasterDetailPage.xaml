@@ -7,8 +7,11 @@
     Style="{StaticResource PageStyle}"
     DataContext="{Binding MasterDetailViewModel, Source={StaticResource Locator}}"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    
     xmlns:model="using:TextGameTool.Models"
     xmlns:views="using:TextGameTool.Views"
+    xmlns:vms="using:TextGameTool.ViewModels"
+    
     mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
@@ -16,22 +19,34 @@
         </TransitionCollection>
     </Page.Transitions>
     <Page.Resources>
-        <DataTemplate x:Key="ItemTemplate" x:DataType="model:SampleOrder">
+        <DataTemplate x:Key="ItemTemplate" x:DataType="vms:DialogueViewModel">
             <Grid Height="64" Padding="0,8">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <FontIcon Grid.Column="0" Tag="{x:Bind HashIdentIcon}" FontSize="40" Glyph="{x:Bind SymbolAsChar}" VerticalAlignment="Center" />
-                <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
-                    <TextBlock Text="{x:Bind Company}" Tag="{x:Bind HashIdentTitle}" Style="{ThemeResource ListTitleStyle}"/>
-                    <TextBlock Text="{x:Bind Status}" Style="{StaticResource ListSubTitleStyle}"/>
-                </StackPanel>
+                
+                <TextBlock Text="{x:Bind TitleText, Mode=OneWay}" Style="{ThemeResource ListTitleStyle}"/>
+                <TextBlock Grid.Row="1" Text="{x:Bind BodyPreview, Mode=OneWay}" Style="{ThemeResource ListSubTitleStyle}" TextWrapping="NoWrap" TextTrimming="Clip"/>
+
+                <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"                        
+                        Command="{x:Bind SaveDialogueCommand}"
+                        HorizontalAlignment="Right"
+                        ToolTipService.ToolTip="Save"
+                        Style="{ThemeResource ButtonRevealStyle}">
+                    <Button.Content>
+                        <SymbolIcon Symbol="Save"/>
+                    </Button.Content>
+                </Button>
             </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="DetailsTemplate">
-            <views:MasterDetailDetailControl MasterMenuItem="{Binding}"/>
+            <views:DialogueEditorControl MasterMenuItem="{Binding}"/>
         </DataTemplate>
 
         <DataTemplate x:Key="NoSelectionContentTemplate">
@@ -54,13 +69,46 @@
 
         <controls:MasterDetailsView
             Grid.Row="1"
-            x:Name="MasterDetailsViewControl"
-            ItemsSource="{x:Bind ViewModel.SampleItems, Mode=OneWay}"
+            x:Name="MasterDetailsViewControl"            
+            ItemsSource="{x:Bind ViewModel.DialogueList, Mode=OneWay}"            
             SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}"
             ItemTemplate="{StaticResource ItemTemplate}"
             DetailsTemplate="{StaticResource DetailsTemplate}"
             NoSelectionContentTemplate="{StaticResource NoSelectionContentTemplate}"
-            BorderBrush="Transparent" />
+            BorderBrush="Transparent" >
+            <controls:MasterDetailsView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </controls:MasterDetailsView.ItemContainerStyle>
+            <controls:MasterDetailsView.MasterHeader>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Command="{x:Bind ViewModel.OpenFolderCommand}" HorizontalAlignment="Stretch" Margin="0 0 5 0" Style="{ThemeResource ButtonRevealStyle}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="NewFolder"/>
+                                <TextBlock Margin="10 0 0 0 " Text="Open folder"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+
+                    <Button Grid.Column="1" Command="{x:Bind ViewModel.CreateNewCommand}" HorizontalAlignment="Stretch" Margin="5 0 0 0" Style="{ThemeResource ButtonRevealStyle}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Add"/>
+                                <TextBlock Margin="10 0 0 0" Text="New dialogue"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                    
+                </Grid>
+            </controls:MasterDetailsView.MasterHeader>
+        </controls:MasterDetailsView>
         <!--  Adaptive triggers  -->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">
